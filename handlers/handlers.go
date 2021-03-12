@@ -16,6 +16,7 @@ func AddCorsHeader(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		headers := w.Header()
 		headers.Set("Access-Control-Allow-Origin", "*")
+		headers.Set("Cache-Control", "max-age=86400")
 		next.ServeHTTP(w, r)
 	})
 }
