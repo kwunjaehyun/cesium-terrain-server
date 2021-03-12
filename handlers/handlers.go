@@ -1,6 +1,10 @@
 package handlers
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"github.com/kwunjaehyun/cesium-terrain-server/log"
+)
 
 type Bytes uint64
 
@@ -17,6 +21,8 @@ func AddCorsHeader(next http.Handler) http.Handler {
 		headers := w.Header()
 		headers.Set("Access-Control-Allow-Origin", "*")
 		headers.Set("Cache-Control", "max-age=86400")
+		
+		log.Notice(fmt.Printf("make header"))
 		next.ServeHTTP(w, r)
 	})
 }
